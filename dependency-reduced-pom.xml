@@ -17,7 +17,7 @@
       </plugin>
       <plugin>
         <artifactId>maven-jar-plugin</artifactId>
-        <version>2.4</version>
+        <version>3.0.2</version>
         <configuration>
           <archive>
             <manifest>
@@ -39,7 +39,7 @@
               <transformers>
                 <transformer />
                 <transformer>
-                  <mainClass>com.test.application.HelloWorldApplication</mainClass>
+                  <mainClass>${mainClass}</mainClass>
                 </transformer>
               </transformers>
             </configuration>
@@ -59,10 +59,37 @@
           </filters>
         </configuration>
       </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>1.6.0</version>
+        <configuration>
+          <mainClass>${mainClass}</mainClass>
+          <arguments>
+            <argument>server</argument>
+            <argument>target/classes/config/dev.yml</argument>
+          </arguments>
+          <systemProperties>
+            <systemProperty>
+              <key>application.name</key>
+              <value>HelloWorld</value>
+            </systemProperty>
+            <systemProperty>
+              <key>application.home</key>
+              <value>.</value>
+            </systemProperty>
+            <systemProperty>
+              <key>application.environment</key>
+              <value>dev</value>
+            </systemProperty>
+          </systemProperties>
+        </configuration>
+      </plugin>
     </plugins>
   </build>
   <properties>
     <dropwizard.version>1.0.6</dropwizard.version>
+    <mainClass>com.test.application.HelloWorldApplication</mainClass>
     <java.version>1.8</java.version>
   </properties>
 </project>
