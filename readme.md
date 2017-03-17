@@ -19,7 +19,7 @@ Setup a new Application configuration with the following settings:
 VM options:
 
 ```
--Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.port=1098 -Dapplication.name=primeapp-swsvc -Dapplication.home=. -Dapplication.environment=dev
+-Dapplication.name=l4dropwizard -Dapplication.home=. -Dapplication.environment=dev
 ```
 
 Program arguments:
