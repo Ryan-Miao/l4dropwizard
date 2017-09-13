@@ -90,7 +90,9 @@
   <properties>
     <dropwizard.version>1.0.6</dropwizard.version>
     <mainClass>com.test.application.HelloWorldApplication</mainClass>
+    <feign.version>9.3.1</feign.version>
     <java.version>1.8</java.version>
+    <fasterxml.jackson.version>2.7.8</fasterxml.jackson.version>
   </properties>
 </project>
 
