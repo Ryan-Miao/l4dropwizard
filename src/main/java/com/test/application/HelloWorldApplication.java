@@ -1,6 +1,7 @@
 package com.test.application;
 
 import com.test.com.test.health.TemplateHealthCheck;
+import com.test.com.test.resource.GithubResource;
 import com.test.com.test.resource.HelloWorldResource;
 import com.test.configuration.HelloWorldConfiguration;
 import io.dropwizard.Application;
@@ -37,5 +38,7 @@ public class HelloWorldApplication extends Application<HelloWorldConfiguration> 
         environment.healthChecks().register("template", healthCheck);
         environment.jersey().register(resource);
         environment.jersey().register(healthCheck);
+        environment.jersey().register(new GithubResource(configuration.getGithubApiConfig(), configuration.getHystrixConfig()));
+
     }
 }

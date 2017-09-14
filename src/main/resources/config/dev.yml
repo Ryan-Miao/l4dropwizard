@@ -18,3 +18,14 @@ server:
     - type: http
       port: 8082
 
+
+
+hystrixConfig:
+  hystrix.command.GithubConnector#getUserProfile(String).execution.isolation.thread.timeoutInMilliseconds: 7000
+
+
+githubApiConfig:
+  baseUrl: "https://api.github.com"
+  getUserProfile:
+    connectTimeoutMillis: 2000
+    readTimeoutMillis: 5000
