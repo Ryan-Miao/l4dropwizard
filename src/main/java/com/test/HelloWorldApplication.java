@@ -12,7 +12,7 @@ import io.dropwizard.setup.Environment;
 import java.util.Map;
 
 /**
- * Created by rmiao on 3/14/2017.
+ * Created by Ryan Miao on 3/14/2017.
  */
 public class HelloWorldApplication extends Application<HelloWorldConfiguration> {
 
