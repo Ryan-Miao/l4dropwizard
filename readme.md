@@ -31,7 +31,7 @@ server src/main/resources/config/dev.yml
 Main class:
 
 ```
-com.test.application.HelloWorldApplication
+com.test.HelloWorldApplication
 ```
 
 

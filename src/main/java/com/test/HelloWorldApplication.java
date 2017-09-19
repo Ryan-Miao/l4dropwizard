@@ -1,12 +1,15 @@
-package com.test.application;
+package com.test;
 
-import com.test.com.test.health.TemplateHealthCheck;
-import com.test.com.test.resource.GithubResource;
-import com.test.com.test.resource.HelloWorldResource;
+import com.netflix.config.ConfigurationManager;
+import com.test.domain.health.TemplateHealthCheck;
+import com.test.domain.resource.GithubResource;
+import com.test.domain.resource.HelloWorldResource;
 import com.test.configuration.HelloWorldConfiguration;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+
+import java.util.Map;
 
 /**
  * Created by rmiao on 3/14/2017.
@@ -38,7 +41,14 @@ public class HelloWorldApplication extends Application<HelloWorldConfiguration> 
         environment.healthChecks().register("template", healthCheck);
         environment.jersey().register(resource);
         environment.jersey().register(healthCheck);
-        environment.jersey().register(new GithubResource(configuration.getGithubApiConfig(), configuration.getHystrixConfig()));
+
+        //init hystrix config
+        Map<String, Object> hystrixConfig = configuration.getHystrixConfig();
+        for (final Map.Entry<String, Object> config : hystrixConfig.entrySet()) {
+            ConfigurationManager.getConfigInstance().setProperty(config.getKey(), config.getValue());
+        }
+
+        environment.jersey().register(new GithubResource(configuration.getGithubApiConfig()));
 
     }
 }
