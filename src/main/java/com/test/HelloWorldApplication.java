@@ -1,7 +1,11 @@
 package com.test;
 
 import com.netflix.config.ConfigurationManager;
+import com.test.bundles.ConnectivityBundle;
 import com.test.domain.health.TemplateHealthCheck;
+import com.test.domain.ioc.component.DaggerGithubComponent;
+import com.test.domain.ioc.component.GithubComponent;
+import com.test.domain.ioc.module.ConnectorModule;
 import com.test.domain.resource.GithubResource;
 import com.test.domain.resource.HelloWorldResource;
 import com.test.configuration.HelloWorldConfiguration;
@@ -27,7 +31,7 @@ public class HelloWorldApplication extends Application<HelloWorldConfiguration> 
 
     @Override
     public void initialize(Bootstrap<HelloWorldConfiguration> bootstrap) {
-        // nothing to do yet
+        bootstrap.addBundle(new ConnectivityBundle());
     }
 
     @Override
@@ -42,13 +46,14 @@ public class HelloWorldApplication extends Application<HelloWorldConfiguration> 
         environment.jersey().register(resource);
         environment.jersey().register(healthCheck);
 
-        //init hystrix config
-        Map<String, Object> hystrixConfig = configuration.getHystrixConfig();
-        for (final Map.Entry<String, Object> config : hystrixConfig.entrySet()) {
-            ConfigurationManager.getConfigInstance().setProperty(config.getKey(), config.getValue());
-        }
+        registerResources(configuration, environment);
 
-        environment.jersey().register(new GithubResource(configuration.getGithubApiConfig()));
+    }
 
+    private void registerResources(HelloWorldConfiguration configuration, Environment environment) {
+        GithubComponent component = DaggerGithubComponent.builder()
+                .connectorModule(new ConnectorModule(configuration))
+                .build();
+        environment.jersey().register(component.gitHubResource());
     }
 }

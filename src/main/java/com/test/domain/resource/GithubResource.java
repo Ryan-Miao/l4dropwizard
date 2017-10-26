@@ -1,10 +1,10 @@
 package com.test.domain.resource;
 
 import com.codahale.metrics.annotation.Timed;
-import com.test.configuration.modules.GithubApiConfig;
-import com.test.domain.connect.GithubClient;
 import com.test.domain.entiry.GithubUser;
+import com.test.domain.service.IGithubService;
 
+import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -18,18 +18,18 @@ import javax.ws.rs.core.MediaType;
 @Produces(MediaType.APPLICATION_JSON)
 public class GithubResource {
 
-    private GithubApiConfig githubApiConfig;
+    private IGithubService service;
 
-    public GithubResource(GithubApiConfig githubApiConfig) {
-        this.githubApiConfig = githubApiConfig;
+    @Inject
+    public GithubResource(IGithubService service) {
+        this.service = service;
     }
 
     @GET
     @Timed
     @Path("/users/{username}")
-    public GithubUser getUserProfile(@PathParam("username") final String username){
-        GithubClient client = new GithubClient(githubApiConfig);
-        return client.getUserProfile(username).toBlocking().first();
+    public GithubUser getUserProfile(@PathParam("username") final String username) {
+        return service.getUserProfile(username);
     }
 
 }
