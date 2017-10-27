@@ -1,6 +1,8 @@
 package com.test.domain.ioc.module;
 
 import com.test.configuration.HelloWorldConfiguration;
+import com.test.configuration.modules.GithubApiConfig;
+import com.test.domain.connect.FeignClientBuilder;
 import com.test.domain.connect.GithubClient;
 import dagger.Module;
 import dagger.Provides;
@@ -20,8 +22,15 @@ public class ConnectorModule {
 
     @Provides
     @Singleton
-    public GithubClient provideGithubClient(){
-        return new GithubClient(configuration.getGithubApiConfig());
+    public FeignClientBuilder feignClientBuilder(){
+        return new FeignClientBuilder();
     }
+
+    @Provides
+    @Singleton
+    public GithubApiConfig githubApiConfig(){
+        return configuration.getGithubApiConfig();
+    }
+
 
 }
