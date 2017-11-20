@@ -18,6 +18,4 @@ public class ConnectorModule {
         return new FeignClientBuilder();
     }
 
-
-
 }

@@ -1,5 +1,7 @@
 ## learning for dropwizard
 
+The system building could be found @ [My Blog](http://www.cnblogs.com/woshimrf/tag/dropwizard/)
+
 ### 1. Running in command
 You could
 ```ssh
