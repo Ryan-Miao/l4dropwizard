@@ -3,6 +3,7 @@ package com.test.configuration;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.test.configuration.modules.GithubApiConfig;
 import io.dropwizard.Configuration;
+import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.NotNull;
@@ -24,6 +25,9 @@ public class HelloWorldConfiguration extends Configuration {
 
     @NotNull
     private GithubApiConfig githubApiConfig;
+
+    @JsonProperty("swagger")
+    private SwaggerBundleConfiguration swaggerBundleConfiguration;
 
     @JsonProperty
     public String getTemplate() {
@@ -51,5 +55,9 @@ public class HelloWorldConfiguration extends Configuration {
 
     public GithubApiConfig getGithubApiConfig() {
         return githubApiConfig;
+    }
+
+    public SwaggerBundleConfiguration getSwaggerBundleConfiguration() {
+        return swaggerBundleConfiguration;
     }
 }

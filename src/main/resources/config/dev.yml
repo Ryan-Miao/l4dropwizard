@@ -18,7 +18,10 @@ server:
     - type: http
       port: 8082
 
-
+swagger:
+  resourcePackage: com.test.domain.resource
+  schemes:
+    - http
 
 hystrixConfig:
   hystrix.command.GithubConnector#getUserProfile(String).execution.isolation.thread.timeoutInMilliseconds: 7000

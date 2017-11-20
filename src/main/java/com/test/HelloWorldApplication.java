@@ -1,6 +1,7 @@
 package com.test;
 
 import com.test.bundles.ConnectivityBundle;
+import com.test.bundles.SwitchableSwaggerBundle;
 import com.test.domain.health.TemplateHealthCheck;
 import com.test.domain.ioc.component.DaggerGithubComponent;
 import com.test.domain.ioc.component.GithubComponent;
@@ -29,6 +30,7 @@ public class HelloWorldApplication extends Application<HelloWorldConfiguration> 
     @Override
     public void initialize(Bootstrap<HelloWorldConfiguration> bootstrap) {
         bootstrap.addBundle(new ConnectivityBundle());
+        bootstrap.addBundle(new SwitchableSwaggerBundle());
     }
 
     @Override

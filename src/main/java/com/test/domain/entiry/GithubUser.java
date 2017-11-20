@@ -108,4 +108,18 @@ public class GithubUser {
     public void setBlog(String blog) {
         this.blog = blog;
     }
+
+    @Override
+    public String toString() {
+        return "GithubUser{" +
+                "login='" + login + '\'' +
+                ", id=" + id +
+                ", avatar_url='" + avatar_url + '\'' +
+                ", url='" + url + '\'' +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", location='" + location + '\'' +
+                ", blog='" + blog + '\'' +
+                '}';
+    }
 }

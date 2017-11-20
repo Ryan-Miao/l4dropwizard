@@ -2,6 +2,7 @@ package com.test.domain.resource;
 
 import com.codahale.metrics.annotation.Timed;
 import com.test.domain.entiry.Saying;
+import io.swagger.annotations.Api;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -14,6 +15,7 @@ import java.util.concurrent.atomic.AtomicLong;
 /**
  * Created by rmiao on 3/14/2017.
  */
+@Api("/hello")
 @Path("/hello-world")
 @Produces(MediaType.APPLICATION_JSON)
 public class HelloWorldResource {
