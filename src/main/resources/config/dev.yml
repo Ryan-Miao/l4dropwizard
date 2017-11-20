@@ -7,7 +7,7 @@ server:
 #  hardNofileLimit: 1000
   applicationConnectors:
     - type: http
-      port: 8088
+      port: 8080
 
     #this requires the alpn-boot library on the JVM's boot classpath
     #- type: h2

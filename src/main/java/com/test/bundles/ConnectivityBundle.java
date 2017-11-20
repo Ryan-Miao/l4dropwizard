@@ -1,7 +1,6 @@
 package com.test.bundles;
 
 import com.netflix.config.ConfigurationManager;
-import com.test.HelloWorldApplication;
 import com.test.configuration.HelloWorldConfiguration;
 import io.dropwizard.ConfiguredBundle;
 import io.dropwizard.setup.Bootstrap;
@@ -19,7 +18,6 @@ public class ConnectivityBundle implements ConfiguredBundle<HelloWorldConfigurat
         Map<String, Object> hystrixConfig = configuration.getHystrixConfig();
         for (final Map.Entry<String, Object> config : hystrixConfig.entrySet()) {
             ConfigurationManager.getConfigInstance().setProperty(config.getKey(), config.getValue());
-            System.out.println(config.getKey());
         }
     }
 

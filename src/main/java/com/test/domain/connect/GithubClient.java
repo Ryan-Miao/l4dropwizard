@@ -1,5 +1,6 @@
 package com.test.domain.connect;
 
+import com.test.configuration.HelloWorldConfiguration;
 import com.test.configuration.modules.GithubApiConfig;
 import com.test.domain.entiry.GithubUser;
 import org.slf4j.Logger;
@@ -18,9 +19,9 @@ public class GithubClient {
     private GithubApiConfig githubApiConfig;
 
     @Inject
-    public GithubClient(FeignClientBuilder builder, GithubApiConfig githubApiConfig) {
+    public GithubClient(FeignClientBuilder builder, HelloWorldConfiguration configuration) {
         this.builder = builder;
-        this.githubApiConfig = githubApiConfig;
+        this.githubApiConfig = configuration.getGithubApiConfig();
     }
 
     public Observable<GithubUser> getUserProfile(String username) {

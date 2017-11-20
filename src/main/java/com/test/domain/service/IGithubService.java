@@ -11,5 +11,5 @@ public interface IGithubService {
      * Get Github user profile.
      * @param username github username.
      */
-    public GithubUser getUserProfile(String username);
+    GithubUser getUserProfile(String username);
 }

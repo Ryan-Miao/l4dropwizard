@@ -1,19 +1,16 @@
 package com.test;
 
-import com.netflix.config.ConfigurationManager;
 import com.test.bundles.ConnectivityBundle;
 import com.test.domain.health.TemplateHealthCheck;
 import com.test.domain.ioc.component.DaggerGithubComponent;
 import com.test.domain.ioc.component.GithubComponent;
-import com.test.domain.ioc.module.ConnectorModule;
-import com.test.domain.resource.GithubResource;
+import com.test.domain.ioc.module.ConfigurationModule;
 import com.test.domain.resource.HelloWorldResource;
 import com.test.configuration.HelloWorldConfiguration;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 
-import java.util.Map;
 
 /**
  * Created by Ryan Miao on 3/14/2017.
@@ -52,7 +49,7 @@ public class HelloWorldApplication extends Application<HelloWorldConfiguration> 
 
     private void registerResources(HelloWorldConfiguration configuration, Environment environment) {
         GithubComponent component = DaggerGithubComponent.builder()
-                .connectorModule(new ConnectorModule(configuration))
+                .configurationModule(new ConfigurationModule(configuration))
                 .build();
         environment.jersey().register(component.gitHubResource());
     }
