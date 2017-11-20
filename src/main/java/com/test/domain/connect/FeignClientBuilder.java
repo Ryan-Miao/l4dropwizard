@@ -2,7 +2,9 @@ package com.test.domain.connect;
 
 import com.test.configuration.modules.ConnectAndReadConfig;
 import com.test.domain.exception.UpstreamException;
+import feign.Logger;
 import feign.Request;
+import feign.Retryer;
 import feign.codec.Decoder;
 import feign.codec.Encoder;
 import feign.codec.StringDecoder;
@@ -59,6 +61,8 @@ public class FeignClientBuilder {
                     return new UpstreamException(response.status(), sb.toString());
                 })
                 .logger(new Slf4jLogger())
+                .logLevel(Logger.Level.FULL)
+                .retryer(Retryer.NEVER_RETRY)
                 .options(new Request.Options(connectAndReadConfig.getConnectTimeoutMillis(), connectAndReadConfig.getReadTimeoutMillis()))
                 .requestInterceptor(requestTemplate ->
                         requestTemplate
