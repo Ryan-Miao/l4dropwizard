@@ -27,6 +27,10 @@
             <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
             <name>aliyun</name>
         </repository>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
     </repositories>
     <pluginRepositories>
         <pluginRepository>
@@ -174,6 +178,11 @@
             <groupId>io.dropwizard</groupId>
             <artifactId>dropwizard-testing</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.github.Ryan-Miao</groupId>
+            <artifactId>easy-i18n</artifactId>
+            <version>1.0</version>
         </dependency>
 
 
