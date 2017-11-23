@@ -6,6 +6,7 @@ import com.test.domain.health.TemplateHealthCheck;
 import com.test.domain.ioc.component.DaggerGithubComponent;
 import com.test.domain.ioc.component.GithubComponent;
 import com.test.domain.ioc.module.ConfigurationModule;
+import com.test.domain.resource.EchoResource;
 import com.test.domain.resource.HelloWorldResource;
 import com.test.configuration.HelloWorldConfiguration;
 import io.dropwizard.Application;
@@ -55,5 +56,6 @@ public class HelloWorldApplication extends Application<HelloWorldConfiguration> 
                 .build();
         environment.jersey().register(component.gitHubResource());
         environment.jersey().register(component.localResource());
+        environment.jersey().register(new EchoResource());
     }
 }
