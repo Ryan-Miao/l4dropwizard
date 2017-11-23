@@ -29,6 +29,6 @@ public class MessageService implements IMessageService{
 
     @Override
     public String getMessage(String key, List<String> args, Locale locale) {
-        return messageSource.getMessage(key, null, locale);
+        return messageSource.getMessage(key, args.toArray(), locale);
     }
 }
