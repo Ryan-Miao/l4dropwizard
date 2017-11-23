@@ -1,5 +1,6 @@
 package com.test.domain.resource;
 
+import com.miao.easyi18n.support.ResourceBundleMessageSource;
 import com.test.domain.entiry.GithubUser;
 import com.test.domain.service.IGithubService;
 import io.dropwizard.testing.junit.ResourceTestRule;
@@ -7,6 +8,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Test;
+
+import java.util.Locale;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -50,6 +53,17 @@ public class GithubResourceTest {
         GithubUser githubUser = resources.target("/github/users/ryan-miao").request().get(GithubUser.class);
         assertEquals(name, githubUser.getName());
         verify(service).getUserProfile("ryan-miao");
+    }
+
+    @Test
+    public void testI18n(){
+        ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
+        messageSource.addBasenames("i18n/messages2", "i18n/messages");
+        messageSource.setDefaultEncoding("UTF-8");
+
+        String index = messageSource.getMessage("index", null, Locale.US);
+        System.out.println(index);
+
     }
 
 }

@@ -1,6 +1,7 @@
 package com.test.domain.resource;
 
 import com.codahale.metrics.annotation.Timed;
+import com.miao.easyi18n.support.ResourceBundleMessageSource;
 import com.test.domain.entiry.GithubUser;
 import com.test.domain.service.IGithubService;
 import io.swagger.annotations.Api;
@@ -14,6 +15,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import java.util.Locale;
 
 /**
  * Created by Ryan Miao on 9/14/17.
