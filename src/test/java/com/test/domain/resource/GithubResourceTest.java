@@ -1,6 +1,5 @@
 package com.test.domain.resource;
 
-import com.miao.easyi18n.support.ResourceBundleMessageSource;
 import com.test.domain.entiry.GithubUser;
 import com.test.domain.service.IGithubService;
 import io.dropwizard.testing.junit.ResourceTestRule;
@@ -8,8 +7,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Test;
-
-import java.util.Locale;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -37,7 +34,7 @@ public class GithubResourceTest {
     }
 
     @After
-    public void tearDown(){
+    public void tearDown() {
         // we have to reset the mock after each test because of the
         // @ClassRule, or use a @Rule as mentioned below.
         reset(service);
@@ -55,15 +52,5 @@ public class GithubResourceTest {
         verify(service).getUserProfile("ryan-miao");
     }
 
-    @Test
-    public void testI18n(){
-        ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
-        messageSource.addBasenames("i18n/messages2", "i18n/messages");
-        messageSource.setDefaultEncoding("UTF-8");
-
-        String index = messageSource.getMessage("index", null, Locale.US);
-        System.out.println(index);
-
-    }
 
 }
