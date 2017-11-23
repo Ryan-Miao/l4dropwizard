@@ -54,5 +54,6 @@ public class HelloWorldApplication extends Application<HelloWorldConfiguration> 
                 .configurationModule(new ConfigurationModule(configuration))
                 .build();
         environment.jersey().register(component.gitHubResource());
+        environment.jersey().register(component.localResource());
     }
 }

@@ -1,7 +1,9 @@
 package com.test.domain.ioc.module;
 
 import com.test.domain.service.IGithubService;
+import com.test.domain.service.IMessageService;
 import com.test.domain.service.impl.GithubService;
+import com.test.domain.service.impl.MessageService;
 import dagger.Module;
 import dagger.Provides;
 
@@ -15,7 +17,14 @@ public class ServiceModule {
 
     @Singleton
     @Provides
-    public IGithubService githubService(GithubService service) {
+    IGithubService githubService(GithubService service) {
         return service;
     }
+
+    @Singleton
+    @Provides
+    IMessageService messageService(MessageService messageService){
+        return messageService;
+    }
+
 }

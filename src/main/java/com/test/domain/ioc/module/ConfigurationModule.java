@@ -1,5 +1,6 @@
 package com.test.domain.ioc.module;
 
+import com.miao.easyi18n.support.ResourceBundleMessageSource;
 import com.test.configuration.HelloWorldConfiguration;
 import dagger.Module;
 import dagger.Provides;
@@ -20,7 +21,17 @@ public class ConfigurationModule {
 
     @Provides
     @Singleton
-    public HelloWorldConfiguration helloWorldConfiguration(){
+    HelloWorldConfiguration helloWorldConfiguration(){
         return configuration;
+    }
+
+    @Singleton
+    @Provides
+    ResourceBundleMessageSource resourceBundleMessageSource(){
+        ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
+        messageSource.addBasenames("i18n/messages", "i18n/messages2", "i18n/otherGroup");
+        messageSource.setDefaultEncoding("UTF-8");
+
+        return messageSource;
     }
 }
