@@ -1,6 +1,6 @@
-## learning for dropwizard
+## Learning for dropwizard
 
-The system building could be found @ [My Blog](http://www.cnblogs.com/woshimrf/tag/dropwizard/)
+The system building could be found @ [My Blog](http://blog.rmiao.top/categories/Dropwiard/)
 
 ### 1. Running in command
 You could
