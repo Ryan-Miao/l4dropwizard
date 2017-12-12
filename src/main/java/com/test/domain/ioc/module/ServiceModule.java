@@ -1,6 +1,8 @@
 package com.test.domain.ioc.module;
 
+import com.test.domain.service.IBingService;
 import com.test.domain.service.IGithubService;
+import com.test.domain.service.impl.BingService;
 import com.test.domain.service.IMessageService;
 import com.test.domain.service.impl.GithubService;
 import com.test.domain.service.impl.MessageService;
@@ -18,6 +20,12 @@ public class ServiceModule {
     @Singleton
     @Provides
     IGithubService githubService(GithubService service) {
+        return service;
+    }
+
+    @Singleton
+    @Provides
+    public IBingService bingService(BingService service) {
         return service;
     }
 

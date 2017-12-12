@@ -1,13 +1,23 @@
 template: Hello, %s!
 defaultName: Stranger
 
+logging:
+  level: info
+  appenders:
+    - type: file
+      currentLogFilename: logs/info.log
+      threshold: ALL
+      archive: true
+      archivedLogFilenamePattern: logs/info-%d.log
+      archivedFileCount: 5
+      timeZone: UTC
 
 server:
 #  softNofileLimit: 1000
 #  hardNofileLimit: 1000
   applicationConnectors:
     - type: http
-      port: 8080
+      port: 9008
 
     #this requires the alpn-boot library on the JVM's boot classpath
     #- type: h2
@@ -16,7 +26,7 @@ server:
     #  keyStorePassword: example
   adminConnectors:
     - type: http
-      port: 8082
+      port: 9009
 
 swagger:
   resourcePackage: com.test.domain.resource
@@ -25,6 +35,7 @@ swagger:
 
 hystrixConfig:
   hystrix.command.GithubConnector#getUserProfile(String).execution.isolation.thread.timeoutInMilliseconds: 7000
+  hystrix.command.BingConnector#getBingImgs(int,int).execution.isolation.thread.timeoutInMilliseconds: 7000
 
 
 githubApiConfig:
@@ -32,3 +43,10 @@ githubApiConfig:
   getUserProfile:
     connectTimeoutMillis: 2000
     readTimeoutMillis: 5000
+
+bingApiConfig:
+  baseUrl: "https://cn.bing.com/"
+  getBingImgs:
+    connectTimeoutMillis: 2000
+    readTimeoutMillis: 5000
+

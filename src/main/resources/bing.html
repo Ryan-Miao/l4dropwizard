@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bing</title>
+
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <style>
+        #hero{
+            width: 400px;
+            height: 400px;
+            border: blueviolet 35px dot-dash;
+        }
+    </style>
+</head>
+<body>
+
+<div id="hero">
+
+</div>
+
+
+<script>
+    function getBin() {
+        $.get("http://101.200.218.76:9008/bing/images?n=1", function(data){
+            console.log(data);
+
+            $("#hero").css("background-image", "url(https://cn.bing.com"+data.images[0].url +")");
+        });
+    }
+    $(function(){
+        getBin();
+    });
+</script>
+
+
+
+</body>
+</html>

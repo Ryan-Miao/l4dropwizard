@@ -26,7 +26,7 @@ public class GithubClient {
 
     public Observable<GithubUser> getUserProfile(String username) {
         GithubConnector connector = builder.getTargetWithJackson(GithubConnector.class,
-                "getUserProfile", githubApiConfig.getBaseUrl(), githubApiConfig.getGetUserProfile());
+                FeignClientBuilder.CommandKey.getUserProfile, githubApiConfig.getBaseUrl(), githubApiConfig.getGetUserProfile());
         return connector.getUserProfile(username);
     }
 }

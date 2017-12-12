@@ -1,6 +1,7 @@
 package com.test;
 
 import com.test.bundles.ConnectivityBundle;
+import com.test.bundles.CorsBundle;
 import com.test.bundles.SwitchableSwaggerBundle;
 import com.test.domain.health.TemplateHealthCheck;
 import com.test.domain.ioc.component.DaggerGithubComponent;
@@ -32,6 +33,7 @@ public class HelloWorldApplication extends Application<HelloWorldConfiguration> 
     public void initialize(Bootstrap<HelloWorldConfiguration> bootstrap) {
         bootstrap.addBundle(new ConnectivityBundle());
         bootstrap.addBundle(new SwitchableSwaggerBundle());
+        bootstrap.addBundle(new CorsBundle());
     }
 
     @Override
@@ -57,5 +59,6 @@ public class HelloWorldApplication extends Application<HelloWorldConfiguration> 
         environment.jersey().register(component.gitHubResource());
         environment.jersey().register(component.localResource());
         environment.jersey().register(new EchoResource());
+        environment.jersey().register(component.bing());
     }
 }

@@ -1,6 +1,7 @@
 package com.test.configuration;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.test.configuration.modules.BingApiConfig;
 import com.test.configuration.modules.GithubApiConfig;
 import io.dropwizard.Configuration;
 import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
@@ -25,6 +26,8 @@ public class HelloWorldConfiguration extends Configuration {
 
     @NotNull
     private GithubApiConfig githubApiConfig;
+    @NotNull
+    private BingApiConfig bingApiConfig;
 
     @JsonProperty("swagger")
     private SwaggerBundleConfiguration swaggerBundleConfiguration;
@@ -55,6 +58,10 @@ public class HelloWorldConfiguration extends Configuration {
 
     public GithubApiConfig getGithubApiConfig() {
         return githubApiConfig;
+    }
+
+    public BingApiConfig getBingApiConfig() {
+        return bingApiConfig;
     }
 
     public SwaggerBundleConfiguration getSwaggerBundleConfiguration() {

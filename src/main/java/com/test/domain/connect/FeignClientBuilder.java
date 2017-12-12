@@ -26,17 +26,17 @@ import java.util.concurrent.ConcurrentHashMap;
 public class FeignClientBuilder {
 
     private static final String REQUEST_ID = "requestId";
-    private static final Map<String, Object> CONNECTORS = new ConcurrentHashMap<>();
+    private static final Map<CommandKey, Object> CONNECTORS = new ConcurrentHashMap<>();
 
-    public <T> T getTargetWithString(Class<T> apiType, String commandKey, String baseUrl, ConnectAndReadConfig connectAndReadConfig) {
+    public <T> T getTargetWithString(Class<T> apiType, CommandKey commandKey, String baseUrl, ConnectAndReadConfig connectAndReadConfig) {
         return (T) CONNECTORS.computeIfAbsent(commandKey, k -> getTarget(apiType, baseUrl, connectAndReadConfig, new StringDecoder(), new GsonEncoder()));
     }
 
-    public <T> T getTargetWithGson(Class<T> apiType, String commandKey, String baseUrl, ConnectAndReadConfig connectAndReadConfig) {
+    public <T> T getTargetWithGson(Class<T> apiType, CommandKey commandKey, String baseUrl, ConnectAndReadConfig connectAndReadConfig) {
         return (T) CONNECTORS.computeIfAbsent(commandKey, k -> getTarget(apiType, baseUrl, connectAndReadConfig, new GsonDecoder(), new GsonEncoder()));
     }
 
-    public <T> T getTargetWithJackson(Class<T> apiType, String commandKey, String baseUrl, ConnectAndReadConfig connectAndReadConfig) {
+    public <T> T getTargetWithJackson(Class<T> apiType, CommandKey commandKey, String baseUrl, ConnectAndReadConfig connectAndReadConfig) {
         return (T) CONNECTORS.computeIfAbsent(commandKey, k -> getTarget(apiType, baseUrl, connectAndReadConfig, new JacksonDecoder(), new JacksonEncoder()));
     }
 
@@ -69,5 +69,9 @@ public class FeignClientBuilder {
                                 .header(REQUEST_ID, UUID.randomUUID().toString())
                                 .header("clientId", "l4dropwizard"))
                 .target(apiType, baseUrl);
+    }
+
+    public enum CommandKey{
+        getUserProfile, getBingImgs
     }
 }
