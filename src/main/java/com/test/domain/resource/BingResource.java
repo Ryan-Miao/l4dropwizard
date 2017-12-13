@@ -40,6 +40,8 @@ import static org.eclipse.jetty.servlets.CrossOriginFilter.ACCESS_CONTROL_ALLOW_
 public class BingResource {
     private IBingService service;
     private final Logger LOGGER = LoggerFactory.getLogger(BingResource.class);
+    private final String pattern = "(https?://www\\.cnblogs\\.com/woshimrf[^\\s]*)|(https?://api.rmiao.top[^\\s]*)|(http://localhost[^\\s]*)";
+    private Pattern r = Pattern.compile(pattern);
 
     @Inject
     public BingResource(IBingService service) {
@@ -50,12 +52,6 @@ public class BingResource {
     @Timed
     @Path("/images")
     @ApiOperation(value = "获取bing每日一图.", notes = "只做透传代理，不做任何逻辑变成。就是为了跨域。")
-    @ApiResponses({
-            @ApiResponse(code = 401, message = "Valid credentials are required to access this resource."),
-            @ApiResponse(code = 400, message = "Params not valid."),
-            @ApiResponse(code = 500, message = "Something wrong from the server."),
-            @ApiResponse(code = 200, message = "Success.", response = GithubUser.class)
-    })
     public Response getImages(
             @Context HttpServletRequest request,
             @ApiParam("当前页") @DefaultValue("0") @QueryParam("idx") final int idx,
@@ -65,8 +61,7 @@ public class BingResource {
     ) throws URISyntaxException {
 
         final String referer = request.getHeader("Referer");
-        final String pattern = "(https?://www\\.cnblogs\\.com/woshimrf[^\\s]*)|(https?://api.rmiao.top[^\\s]*)|(http://localhost:9008/swagger)";
-        Pattern r = Pattern.compile(pattern);
+
         Matcher m = r.matcher(referer);
         if (!m.find()) {
             return Response.seeOther(new URI("http://www.cnblogs.com/woshimrf/")).build();

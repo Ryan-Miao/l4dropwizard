@@ -21,15 +21,15 @@
 
 
 <script>
-    function getBin() {
-        $.get("http://127.0.0.1:9008/bing/images?n=1", function(data){
+    function getBin(date) {
+        $.get("http://101.200.218.76/pub_cors/HPImageArchive.aspx?format=js&idx=0&n=1&_d="+date, function(data){
             console.log(data);
 
             $("#hero").css("background-image", "url(https://cn.bing.com"+data.images[0].url +")");
         });
     }
     $(function(){
-        getBin();
+        getBin('123');
     });
 </script>
 
