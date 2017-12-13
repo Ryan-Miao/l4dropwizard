@@ -1,6 +1,6 @@
 #!/bin/sh
 
-APP_NAME=bing
+APP_NAME=l4dropwizard
 
 tpid=`ps -ef|grep $APP_NAME|grep -v grep|grep -v kill|awk '{print $2}'`
 
