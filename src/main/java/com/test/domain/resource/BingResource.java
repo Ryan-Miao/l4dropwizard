@@ -13,6 +13,9 @@ import javax.ws.rs.core.CacheControl;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import static org.eclipse.jetty.servlets.CrossOriginFilter.ACCESS_CONTROL_ALLOW_CREDENTIALS_HEADER;
+import static org.eclipse.jetty.servlets.CrossOriginFilter.ACCESS_CONTROL_ALLOW_ORIGIN_HEADER;
+
 @Api("/bing")
 @Path("/bing")
 @Produces(MediaType.APPLICATION_JSON)
@@ -44,18 +47,19 @@ public class BingResource {
 
         final CacheControl control = new CacheControl();
         control.setMaxAge(maxAge);
-        control.setProxyRevalidate(true);
-        control.setPrivate(false);
 
-        LOGGER.error("Get origin:{}", origin);
+        if (LOGGER.isDebugEnabled()){
+            LOGGER.debug("Get origin:{}", origin);
+        }
+
         try {
             return Response.ok()
                     .entity(service.getImages(idx, n))
                     .encoding("UTF-8")
                     .allow("GET")
                     .cacheControl(control)
-                    .header("Access-Control-Allow-Origin", origin)
-                    .header("Access-Control-Allow-Credentials", "true")
+                    .header(ACCESS_CONTROL_ALLOW_ORIGIN_HEADER, origin)
+                    .header(ACCESS_CONTROL_ALLOW_CREDENTIALS_HEADER, "true")
                     .build();
         } catch (Exception e) {
             return Response.serverError().encoding("UTF-8").entity(e.getMessage()).build();
